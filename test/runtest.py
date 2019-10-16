@@ -13,8 +13,8 @@ except:
 TEST_DIR = pathlib.Path(__file__).absolute().parent
 PROJECT_DIR = TEST_DIR.parent
 EXPECTED_OUTPUT = r"""# -*- coding: utf-8 -*-
-# EASY-INSTALL-ENTRY-SCRIPT: 'dummypkg==0.0.0','console_scripts','hello'
-__requires__ = 'dummypkg==0.0.0'
+# EASY-INSTALL-ENTRY-SCRIPT: 'dummypkg{version}','console_scripts','hello'
+__requires__ = 'dummypkg{version}'
 import re
 import sys
 
@@ -28,6 +28,7 @@ if sys.version_info[0] == 2:
     use_virtualenv = True
 # Python 2 needs virtualenv, and Travis already executes in a virtualenv
 use_virtualenv = True
+use_editable = True
 
 if False:
     EXPECTED_OUTPUT = '\n'.join(
@@ -35,6 +36,11 @@ if False:
          if not line.startswith('# EASY-INSTALL-ENTRY-SCRIPT')
          and not line.startswith('__requires__')]
     )
+
+if use_editable:
+    EXPECTED_OUTPUT = EXPECTED_OUTPUT.format(version="")
+else:
+    EXPECTED_OUTPUT = EXPECTED_OUTPUT.format(version="==0.0.0")
 
 
 def run(*args, **kwargs):
