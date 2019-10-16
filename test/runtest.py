@@ -59,7 +59,7 @@ def main():
 
     try:
         with open(str(testenv / "bin" / "hello")) as output:
-            output.readline()  # eat shabang line, which is non-deterministic.
+            #output.readline()  # eat shabang line, which is non-deterministic.
             result = output.read().strip()
             assert result == EXPECTED_OUTPUT, result + str(list(difflib.unified_diff(EXPECTED_OUTPUT.splitlines(), result.splitlines())))
     finally:
