@@ -26,9 +26,11 @@ def main():
     shutil.copy2(str(PROJECT_DIR/"fastentrypoints.py"), str(fep_copy))
 
     testenv = pathlib.Path("testenv")
-    sp.run([sys.executable, "-m", "venv", str(testenv)], check=True)
-    testpython = testenv / "bin" / "python"
+    sp.run([sys.executable, "-m", "venv", "--copies", str(testenv)], check=True)
+    sp.run(["find", "testenv"])
+    testpython = testenv / "bin" / "python3"
     sp.run([str(testpython), "-m", "pip", "install", TEST_DIR], check=True)
+    sp.run(["find", "testenv"])
 
     try:
         with open(str(testenv / "bin" / "hello")) as output:
