@@ -29,7 +29,7 @@ if sys.version_info[0] == 2:
 # Python 2 needs virtualenv, and Travis already executes in a virtualenv
 use_virtualenv = True
 
-if use_virtualenv:
+if False:
     EXPECTED_OUTPUT = '\n'.join(
         [line for line in EXPECTED_OUTPUT.splitlines()
          if not line.startswith('# EASY-INSTALL-ENTRY-SCRIPT')
