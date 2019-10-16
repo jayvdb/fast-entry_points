@@ -49,13 +49,14 @@ def main():
     shutil.copy2(str(PROJECT_DIR/"fastentrypoints.py"), str(fep_copy))
 
     testenv = pathlib.Path("testenv")
+    testpython = testenv / "bin" / ("python" + str(sys.version_info[0]))
     pip = testenv / "bin" / "pip"
     if use_virtualenv:
         run([sys.executable, "-m", "virtualenv", str(testenv)])
     else:
         run([sys.executable, "-m", "venv", str(testenv)])
 
-    run([str(pip), "install", "--no-build-isolation", str(TEST_DIR)])
+    run([str(pip), "install", "-e", str(TEST_DIR)])
 
     try:
         with open(str(testenv / "bin" / "hello")) as output:
