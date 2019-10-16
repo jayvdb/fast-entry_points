@@ -55,7 +55,7 @@ def main():
     else:
         run([sys.executable, "-m", "venv", str(testenv)])
 
-    run([str(pip), "install", str(TEST_DIR)])
+    run([str(pip), "install", "--no-build-isolation", str(TEST_DIR)])
 
     try:
         with open(str(testenv / "bin" / "hello")) as output:
